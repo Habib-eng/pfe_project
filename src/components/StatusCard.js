@@ -25,7 +25,6 @@ export default function StatusCard({
 
                     <CardStatus title={title} amount={amount} />
                 </CardRow>
-
                 <CardStatusFooter
                     amount={percentage}
                     color={percentageColor}

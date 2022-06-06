@@ -7,8 +7,20 @@ import Icon from '@material-tailwind/react/Icon';
 import LeadText from '@material-tailwind/react/LeadText';
 import Button from '@material-tailwind/react/Button';
 import ProfilePicture from 'assets/img/team-1-800x800.jpg';
+import { useEffect, useState } from 'react/cjs/react.development';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function ProfileCard() {
+    const { id } = useParams();
+    const [chefInfo, setChefInfo] = useState([]);
+    useEffect(() => {
+      const getData = async () => {
+        const data = await axios.get("http://localhost:3002/employer_liste_test/" + id);
+        setChefInfo(data.data); 
+      };
+      getData();
+    },[])
     return (
         <Card>
             <div className="flex flex-wrap justify-center">
@@ -37,28 +49,24 @@ export default function ProfileCard() {
                 </div>
             </div>
             <div className="text-center">
-                <H5 color="gray">John Smith</H5>
+                <H5 color="gray">{chefInfo.nom}</H5>
                 <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
                     <Icon name="place" size="xl" />
-                    Los Angeles, California
+                    Chef Departement
                 </div>
                 <div className="mb-2 text-gray-700 mt-10 flex items-center justify-center gap-2">
                     <Icon name="work" size="xl" />
-                    Solution Manager - Creative Tim Officer
+                    {chefInfo.departement}
                 </div>
                 <div className="mb-2 text-gray-700 flex items-center justify-center gap-2">
-                    <Icon name="account_balance" size="xl" />
-                    University of Computer Science
+                    <Icon name="phone" size="xl" />
+                    {chefInfo.mobile}
                 </div>
             </div>
             <CardBody>
                 <div className="border-t border-lightBlue-200 text-center px-2 ">
                     <LeadText color="blueGray">
-                        An artist of considerable range, Jenna the name taken by
-                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                        performs and records all of his own music, giving it a
-                        warm, intimate feel with a solid groove structure. An
-                        artist of considerable range.
+                        {chefInfo.description}
                     </LeadText>
                 </div>
             </CardBody>

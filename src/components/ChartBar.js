@@ -4,37 +4,28 @@ import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 
-export default function ChartBar() {
+export default function ChartBar( param ) {     
     useEffect(() => {
+        var months = [];
+        var values = [];
+        var data = param['data'];
+        data.forEach(element => {
+            months.push(element['month']);
+            values.push(element['data']);
+        });
         let config = {
             type: 'bar',
             data: {
-                labels: [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                ],
+                labels: months,
                 datasets: [
                     {
                         label: new Date().getFullYear(),
                         backgroundColor: '#03a9f4',
                         borderColor: '#03a9f4',
-                        data: [30, 78, 56, 34, 100, 45, 13],
+                        data: values,
                         fill: false,
                         barThickness: 8,
-                    },
-                    {
-                        label: new Date().getFullYear() - 1,
-                        fill: false,
-                        backgroundColor: '#f44336',
-                        borderColor: '#f44336',
-                        data: [27, 68, 86, 74, 10, 4, 87],
-                        barThickness: 8,
-                    },
+                    }
                 ],
             },
             options: {
@@ -105,9 +96,9 @@ export default function ChartBar() {
         <Card>
             <CardHeader color="pink" contentPosition="left">
                 <h6 className="uppercase text-gray-200 text-xs font-medium">
-                    Overview
+                    
                 </h6>
-                <h2 className="text-white text-2xl">Sales value</h2>
+                <h2 className="text-white text-2xl">Evolution de nombre des réclamations des client</h2>
             </CardHeader>
             <CardBody>
                 <div className="relative h-96">
