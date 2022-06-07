@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { Alert, Card, Icon, Input, Modal, ModalBody, ModalHeader } from "@material-tailwind/react";
 import { Button } from "@material-tailwind/react";
+import { Heading5 } from "@material-tailwind/react";
 import { CardBody,CardFooter,CardHeader } from "@material-tailwind/react";
 import axios from "axios";
 import { useState, useEffect } from "react/cjs/react.development";
@@ -9,7 +10,7 @@ export default function Reclamations() {
     const { id } = useParams();
     const [open, setOpen] = useState(false);
  
-     const handleOpen = (value) => setOpen(!open);
+    const handleOpen = (value) => setOpen(!open);
     const [fetchedData, setFetchedData] = useState([]);
     useEffect(() => {
       const getData = async () => {
@@ -18,8 +19,8 @@ export default function Reclamations() {
         console.log(fetchedData);
       };
       getData();
-    },[])
-
+    },[]);
+    
     return (
         <div className="grid grid-cols-3 gap-5 m-10">
           {
@@ -32,7 +33,7 @@ export default function Reclamations() {
                 </svg>
               </CardHeader>
               <CardBody className="text-center">
-                <h2 className="m-5"> {item.soumispar} </h2>
+                <Heading5 className="m-5"> {item.soumispar} </Heading5>
                   <Alert className="text-center">Date de soumission: {item.date} </Alert>
                   <p>
                     {item.description}
@@ -50,7 +51,7 @@ export default function Reclamations() {
               <Modal color="orange" active={open} toggler={handleOpen}>
                 <ModalHeader>Affecter cette réclamation à un chef de service</ModalHeader>
                 <ModalBody>
-                <div className="m-3">
+                <div className="my-3">
                 <h6>Choisir le chef de service </h6>
                   <select name="role" class="block w-64 text-gray-700 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500">
                     <option value="Admin" class="text-gray-400">
